@@ -11,7 +11,7 @@ import { SkeletonChatItem } from '../UI/Loader'
  * Sidebar component
  */
 const Sidebar = () => {
-  const { conversations, loading, setActiveConversation, getOrCreateConversation, fetchMessages } = useChat()
+  const { conversations, loading, activeConversation, setActiveConversation, getOrCreateConversation, fetchMessages } = useChat()
   const [showUserSearch, setShowUserSearch] = useState(false)
 
   const handleSelectConversation = async (conversationId) => {
@@ -68,6 +68,7 @@ const Sidebar = () => {
         ) : (
           <ChatList
             conversations={conversations}
+            activeConversation={activeConversation}
             onSelectConversation={handleSelectConversation}
           />
         )}

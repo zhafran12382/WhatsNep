@@ -28,6 +28,7 @@ export default [
         setInterval: 'readonly',
         clearInterval: 'readonly',
         Notification: 'readonly',
+        Blob: 'readonly',
       },
     },
     plugins: {

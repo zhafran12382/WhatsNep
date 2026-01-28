@@ -81,7 +81,20 @@ export const AuthProvider = ({ children }) => {
 
     // Set offline on unmount/page close
     const handleBeforeUnload = () => {
-      updateOnlineStatus('offline')
+      // Use sendBeacon for more reliable status update on page unload
+      const url = `${supabase.supabaseUrl}/rest/v1/profiles?id=eq.${user.id}`
+      const data = JSON.stringify({
+        status: 'offline',
+        last_seen: new Date().toISOString(),
+      })
+      
+      if (navigator.sendBeacon) {
+        const blob = new Blob([data], { type: 'application/json' })
+        navigator.sendBeacon(url, blob)
+      } else {
+        // Fallback for browsers that don't support sendBeacon
+        updateOnlineStatus('offline')
+      }
     }
 
     window.addEventListener('beforeunload', handleBeforeUnload)

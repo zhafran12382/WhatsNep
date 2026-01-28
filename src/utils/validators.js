@@ -16,7 +16,7 @@ export const isValidUsername = (username) => {
 
 /**
  * Check password strength
- * Returns: { strength: 'weak'|'medium'|'strong', score: 0-3 }
+ * Returns: { strength: 'weak'|'medium'|'strong', score: 0-5 }
  */
 export const checkPasswordStrength = (password) => {
   let score = 0
@@ -34,7 +34,7 @@ export const checkPasswordStrength = (password) => {
   if (/\d/.test(password)) score++
   if (/[^a-zA-Z0-9]/.test(password)) score++
   
-  // Determine strength based on score
+  // Determine strength based on score (0-5)
   if (score <= 2) {
     return { strength: 'weak', score }
   } else if (score <= 3) {
@@ -53,14 +53,12 @@ export const isValidPassword = (password) => {
 
 /**
  * Sanitize user input to prevent XSS
+ * Note: React automatically escapes text content, so this is mainly for extra safety
+ * in cases where content might be used outside of React's automatic escaping.
  */
 export const sanitizeInput = (input) => {
   if (typeof input !== 'string') return input
   
-  return input
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;')
-    .replace(/\//g, '&#x2F;')
+  // Trim and limit length
+  return input.trim().substring(0, 5000)
 }

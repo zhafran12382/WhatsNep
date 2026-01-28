@@ -1,7 +1,7 @@
 {
   "name": "whatsnep",
   "version": "1.0.0",
-  "description": "noo",
+  "description": "WhatsNep - Modern chat application with React and Supabase",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -18,7 +18,6 @@ const Settings = () => {
   const { updatePassword } = useAuth()
 
   const [formData, setFormData] = useState({
-    currentPassword: '',
     newPassword: '',
     confirmPassword: '',
   })
@@ -81,7 +80,6 @@ const Settings = () => {
 
       // Reset form
       setFormData({
-        currentPassword: '',
         newPassword: '',
         confirmPassword: '',
       })

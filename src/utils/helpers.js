@@ -12,12 +12,9 @@ export const generateConversationId = (userId1, userId2) => {
 export const debounce = (func, wait) => {
   let timeout
   return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout)
-      func(...args)
-    }
+    const context = this
     clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
+    timeout = setTimeout(() => func.apply(context, args), wait)
   }
 }
 
@@ -25,9 +22,11 @@ export const debounce = (func, wait) => {
  * Get initials from name or username
  */
 export const getInitials = (name) => {
-  if (!name) return '?'
+  if (!name || typeof name !== 'string') return '?'
   
-  const parts = name.trim().split(' ')
+  const parts = name.trim().split(' ').filter(part => part.length > 0)
+  
+  if (parts.length === 0) return '?'
   if (parts.length === 1) {
     return parts[0].substring(0, 2).toUpperCase()
   }

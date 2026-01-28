@@ -125,7 +125,7 @@ CREATE POLICY "Users can send messages to their conversations"
     )
   );
 
-CREATE POLICY "Users can update their own messages" 
+CREATE POLICY "Users can update message read status" 
   ON messages FOR UPDATE 
   USING (
     EXISTS (
@@ -133,6 +133,14 @@ CREATE POLICY "Users can update their own messages"
       WHERE conversation_participants.conversation_id = messages.conversation_id
       AND conversation_participants.user_id = auth.uid()
     )
+    AND sender_id != auth.uid()
+  )
+  WITH CHECK (
+    -- Only allow updating is_read field, not content or other fields
+    is_read IS DISTINCT FROM OLD.is_read
+    AND content = OLD.content
+    AND sender_id = OLD.sender_id
+    AND conversation_id = OLD.conversation_id
   );
 
 -- Create indexes for better performance
