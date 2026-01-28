@@ -6,7 +6,6 @@ import TypingIndicator from './TypingIndicator'
 import Avatar from '../UI/Avatar'
 import { useChat } from '../../hooks/useChat'
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
-import { SkeletonMessage } from '../UI/Loader'
 
 /**
  * Chat window component
