@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@layer theme {
+  :root {
+    --color-primary-50: oklch(0.97 0.01 240);
+    --color-primary-100: oklch(0.93 0.04 240);
+    --color-primary-200: oklch(0.86 0.08 240);
+    --color-primary-300: oklch(0.77 0.12 240);
+    --color-primary-400: oklch(0.66 0.16 240);
+    --color-primary-500: oklch(0.57 0.20 240);
+    --color-primary-600: oklch(0.48 0.18 240);
+    --color-primary-700: oklch(0.39 0.14 240);
+    --color-primary-800: oklch(0.30 0.10 240);
+    --color-primary-900: oklch(0.22 0.06 240);
+    
+    --color-dark-100: #1e293b;
+    --color-dark-200: #0f172a;
+    --color-dark-300: #020617;
+    
+    --color-accent-purple: #8b5cf6;
+    --color-accent-cyan: #06b6d4;
+    --color-accent-teal: #14b8a6;
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--color-dark-300);
+    color: rgb(243 244 246);
+    font-family: Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .gradient-bg {
+    background: linear-gradient(to bottom right, var(--color-accent-purple), #0284c7, var(--color-accent-cyan));
+  }
+  
+  .gradient-text {
+    background: linear-gradient(to right, var(--color-accent-purple), var(--color-accent-cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .glass-effect {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .chat-bubble {
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    max-width: 28rem;
+    word-wrap: break-word;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+  }
+  
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
